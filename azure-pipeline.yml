@@ -35,19 +35,19 @@ stages:
         displayName: PerfTest
         steps:
           - task: Bash@3
-              inputs:
-                targetType: 'inline'
-                script: |
-                  mkdir reports
-                  docker run --rm -u=root -v $(Build.SourcesDirectory)/reports:/tmp/reports  -v $(Build.SourcesDirectory)/tests:/mnt/jmeter/ -e JVM_ARGS='${{ variables.JVM_ARGS }}' -e junit_report="{{ variables.JUNIT }}" getcarrier/perfmeter:latest -n -t /mnt/jmeter/ $(TEST).jmx -JVUSERS=$(VUSERS) -JRAMP_UP=$(RAMP_UP) -JTHINK_TIME=$(THINK_TIME) -JDURATION=$(DURATION) -JENVIRONMENT=$(ENV_URL) -Jjmeter.reportgenerator.overall_granularity=10000
-                  ls -la reports
-                  sudo chmod -R 777 $(Build.SourcesDirectory)
-                - task: PublishTestResults@2
-                  inputs:
-                    testResultsFormat: 'JUnit' # Options: JUnit, NUnit, VSTest, xUnit, cTest
-                    testResultsFiles: 'reports/jmeter.xml'
-                - task: PublishPipelineArtifact@1
-                  displayName: Publish JMeter Report
-                  inputs:
-                    targetPath: reports
-                    artifact: jmeter
+            inputs:
+              targetType: 'inline'
+              script: |
+                mkdir reports
+                docker run --rm -u=root -v $(Build.SourcesDirectory)/reports:/tmp/reports  -v $(Build.SourcesDirectory)/tests:/mnt/jmeter/ -e JVM_ARGS='${{ variables.JVM_ARGS }}' -e junit_report="{{ variables.JUNIT }}" getcarrier/perfmeter:latest -n -t /mnt/jmeter/ $(TEST).jmx -JVUSERS=$(VUSERS) -JRAMP_UP=$(RAMP_UP) -JTHINK_TIME=$(THINK_TIME) -JDURATION=$(DURATION) -JENVIRONMENT=$(ENV_URL) -Jjmeter.reportgenerator.overall_granularity=10000
+                ls -la reports
+                sudo chmod -R 777 $(Build.SourcesDirectory)
+          - task: PublishTestResults@2
+            inputs:
+              testResultsFormat: 'JUnit' # Options: JUnit, NUnit, VSTest, xUnit, cTest
+              testResultsFiles: 'reports/jmeter.xml'
+          - task: PublishPipelineArtifact@1
+            displayName: Publish JMeter Report
+            inputs:
+              targetPath: reports
+              artifact: jmeter
