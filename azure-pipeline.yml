@@ -35,7 +35,6 @@ stages:
         displayName: PerfTest
         steps:
           - task: Bash@3
-              displayName: Performance Test
               inputs:
                 targetType: 'inline'
                 script: |
