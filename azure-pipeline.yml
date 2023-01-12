@@ -11,7 +11,7 @@ variables:
 #  ENV_URL: ''
 
 schedules:
-  - cron: "0 5 * * *"
+  - cron: "0 9,21 * * *"
     displayName: Daily build
     branches:
       include:
@@ -39,7 +39,7 @@ stages:
               targetType: 'inline'
               script: |
                 mkdir reports
-                docker run --rm -u=root -v $(Build.SourcesDirectory)/reports:/tmp/reports  -v $(Build.SourcesDirectory)/tests:/mnt/jmeter/ -e JVM_ARGS='${{ variables.JVM_ARGS }}' -e junit_report="{{ variables.JUNIT }}" getcarrier/perfmeter:latest -n -t /mnt/jmeter/$(TEST).jmx -JVUSERS=$(VUSERS) -JRAMP_UP=$(RAMP_UP) -JTHINK_TIME=$(THINK_TIME) -JDURATION=$(DURATION) -JENVIRONMENT=$(ENV_URL) -Jjmeter.reportgenerator.overall_granularity=10000
+                docker run --rm -u=root -v $(Build.SourcesDirectory)/reports:/tmp/reports  -v $(Build.SourcesDirectory)/tests:/mnt/jmeter/ -e JVM_ARGS='${{ variables.JVM_ARGS }}' -e junit_report="{{ variables.JUNIT }}" getcarrier/perfmeter:latest -n -t /mnt/jmeter/$(TEST).jmx -JVUSERS=$(VUSERS) -JRAMP_UP=$(RAMP_UP) -JTHINK_TIME=$(THINK_TIME) -JDURATION=$(DURATION) -JENVIRONMENT=$(ENV_URL) -JTOKEN=$(token) -Jjmeter.reportgenerator.overall_granularity=10000
                 ls -la reports
                 sudo chmod -R 777 $(Build.SourcesDirectory)
           - task: PublishTestResults@2
