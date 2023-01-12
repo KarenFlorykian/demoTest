@@ -7,7 +7,7 @@ variables:
 #  TEST: ''
 #  RAMP_UP: '1'
 #  DURATION: '300'
-#  VUSERS: '5'
+  VUSERS: '0'
 #  ENV_URL: ''
 
 schedules:
