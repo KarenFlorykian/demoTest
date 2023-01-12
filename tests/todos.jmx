@@ -25,7 +25,7 @@
           </elementProp>
           <elementProp name="users" elementType="Argument">
             <stringProp name="Argument.name">users</stringProp>
-            <stringProp name="Argument.value">${__P(VUSERS, 20)}</stringProp>
+            <stringProp name="Argument.value">${__P(VUSERS, 0)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="ramp_up" elementType="Argument">
@@ -55,7 +55,7 @@
           </elementProp>
           <elementProp name="reload" elementType="Argument">
             <stringProp name="Argument.name">reload</stringProp>
-            <stringProp name="Argument.value">${__P(RELOAD, 0)}</stringProp>
+            <stringProp name="Argument.value">${__P(RELOAD, 1)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
