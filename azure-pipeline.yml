@@ -7,16 +7,16 @@ variables:
 #  TEST: ''
 #  RAMP_UP: '1'
 #  DURATION: '300'
-  VUSERS: '0'
+#  VUSERS: '0'
 #  ENV_URL: ''
 
-schedules:
-  - cron: "0 9,21 * * *"
-    displayName: Daily build
-    branches:
-      include:
-        - develop
-    always: true
+#schedules:
+#  - cron: "0 9,21 * * *"
+#    displayName: Daily build
+#    branches:
+#      include:
+#        - develop
+#    always: true
 
 parameters:
   - name: generateReport
