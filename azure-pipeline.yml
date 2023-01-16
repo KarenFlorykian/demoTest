@@ -2,7 +2,7 @@ trigger:
   - develop
 
 variables:
-  JVM_ARGS: '-Xms1g -Xmx1g'
+  JVM_ARGS: '-Xms1g -Xmx4g'
   JUNIT: 'True'
 #  TEST: ''
 #  RAMP_UP: '1'
