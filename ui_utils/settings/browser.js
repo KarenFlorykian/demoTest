@@ -6,7 +6,7 @@ const mobile = new Constants.Mobile();
 class Browser {
     get headlessDesktop() {
         return {
-            args: [`--window-size=${ desktop.screenWidth },${ desktop.screenHeight }`, '--allow-no-sandbox-job', '--allow-sandbox-debugging', '--no-sandbox', '--disable-gpu', '--disable-gpu-sandbox', '--display', '--ignore-certificate-errors', '--disable-storage-reset=true'],
+            args: [`--window-size=${ desktop.screenWidth },${ desktop.screenHeight }`, '--disable-dev-shm-usage', '--allow-no-sandbox-job', '--allow-sandbox-debugging', '--no-sandbox', '--disable-gpu', '--disable-gpu-sandbox', '--display', '--ignore-certificate-errors', '--disable-storage-reset=true'],
             defaultViewport: {
                 width: desktop.screenWidth,
                 height: desktop.screenHeight
