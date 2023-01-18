@@ -25,7 +25,7 @@ stages:
               targetType: 'inline'
               script: |
                 mkdir reports
-                docker run --rm -v $(Build.SourcesDirectory):/mnt/lightohouse -w "/mnt/lightohouse" -v $(Build.SourcesDirectory)/reports:/tmp ibombit/lighthouse-puppeteer-chrome:node16 node $(TEST).js $(ENV_URL) $(VUSER) $(PASS)
+                docker run --rm -v $(Build.SourcesDirectory):/mnt/lightohouse -w "/mnt/lightohouse" -v $(Build.SourcesDirectory)/reports:/tmp ibombit/lighthouse-puppeteer-chrome:node16 node $(TEST).js "$(ENV_URL)" $(VUSER) $(PASS)
                 ls -la reports
                 sudo chmod -R 777 $(Build.SourcesDirectory)
           - task: PublishTestResults@2
