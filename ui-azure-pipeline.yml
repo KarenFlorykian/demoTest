@@ -25,7 +25,8 @@ stages:
               targetType: 'inline'
               script: |
                 mkdir reports
-                docker run --rm -v $(Build.SourcesDirectory):/mnt/lightohouse -w "/mnt/lightohouse" -v $(Build.SourcesDirectory)/reports:/tmp ibombit/lighthouse-puppeteer-chrome:node16 node onliner.js  https://karens.pythonanywhere.com/ temp temp
+                docker run --rm -v /home/ubuntu/myagent/_work/1/s:/mnt/lightohouse -w "/mnt/lightohouse" -v /home/ubuntu/myagent/_work/1/s/reports:/tmp ibombit/lighthouse-puppeteer-chrome:node16 node onliner.js https://karens.pythonanywhere.com/ temp temp
+                docker run --rm -v $(Build.SourcesDirectory):/mnt/lightohouse -w "/mnt/lightohouse" -v $(Build.SourcesDirectory)/reports:/tmp ibombit/lighthouse-puppeteer-chrome:node16 node onliner.js https://karens.pythonanywhere.com/ temp temp
                 ls -la reports
                 sudo chmod -R 777 $(Build.SourcesDirectory)
           - task: PublishTestResults@2
