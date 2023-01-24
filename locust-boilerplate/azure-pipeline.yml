@@ -25,15 +25,16 @@ stages:
               targetType: 'inline'
               script: |
                 mkdir locust-boilerplate/reports
-                docker run -u=root --rm --name=locusttest -v $(Build.SourcesDirectory)/locust-boilerplate:/mnt/locust -w /mnt/locust fkaren/perflocust:latest -f locustfile.py -H=$(ENV_URL) -u $(VUSER) -r $(RAMP_UP) --headless --run-time=$(DURATION) --print-stats --csv=report --logfile=reports/report.log --log-transactions-in-file --html=reports/report.html --csv-full-history
+                docker run -u=root --rm --name=locusttest -v $(Build.SourcesDirectory)/locust-boilerplate:/mnt/locust -w /mnt/locust fkaren/perflocust:latest -f locustfile.py -H=$(ENV_URL) -u $(VUSER) -r $(RAMP_UP) --headless --run-time=$(DURATION) --print-stats --csv=reports/report --logfile=reports/report.log --log-transactions-in-file --html=reports/report.html --csv-full-history
+                ls -la locust-boilerplate
                 ls -la locust-boilerplate/reports
                 sudo chmod -R 777 $(Build.SourcesDirectory)
           - task: PublishTestResults@2
             inputs:
               testResultsFormat: 'JUnit' # Options: JUnit, NUnit, VSTest, xUnit, cTest
-              testResultsFiles: 'reports/jmeter.xml'
+              testResultsFiles: 'reports/locust.xml'
           - task: PublishPipelineArtifact@1
-            displayName: Publish Lighthouse Report
+            displayName: Publish Locust Report
             inputs:
-              targetPath: reports
+              targetPath: locust-boilerplate/reports
               artifact: locust_report

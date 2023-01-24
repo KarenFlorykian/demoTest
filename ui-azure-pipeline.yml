@@ -31,7 +31,7 @@ stages:
           - task: PublishTestResults@2
             inputs:
               testResultsFormat: 'JUnit' # Options: JUnit, NUnit, VSTest, xUnit, cTest
-              testResultsFiles: 'reports/jmeter.xml'
+              testResultsFiles: 'reports/lightohouse.xml'
           - task: PublishPipelineArtifact@1
             displayName: Publish Lighthouse Report
             inputs:
