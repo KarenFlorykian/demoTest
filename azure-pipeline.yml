@@ -48,6 +48,7 @@ stages:
               testResultsFiles: 'reports/jmeter.xml'
           - task: PublishPipelineArtifact@1
             displayName: Publish JMeter Report
+            condition: and(always(), eq('${{ parameters.generateReport }}', 'true'))
             inputs:
               targetPath: reports
               artifact: jmeter

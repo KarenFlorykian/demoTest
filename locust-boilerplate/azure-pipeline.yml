@@ -36,4 +36,5 @@ stages:
             displayName: Publish Locust Report
             inputs:
               targetPath: locust-boilerplate/reports
+              condition: and(always(), eq('${{ parameters.generateReport }}', 'true'))
               artifact: locust_report

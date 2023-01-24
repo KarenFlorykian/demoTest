@@ -34,6 +34,7 @@ stages:
               testResultsFiles: 'reports/lightohouse.xml'
           - task: PublishPipelineArtifact@1
             displayName: Publish Lighthouse Report
+            condition: and(always(), eq('${{ parameters.generateReport }}', 'true'))
             inputs:
               targetPath: reports
               artifact: lighthouse
