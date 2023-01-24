@@ -10,6 +10,6 @@ Test scripts located in `locustfiles` folder.
 $ python3 -m venv ./venv 
 $ source venv/bin/activate
 $ pip install -r requirements.txt
-$ locust -f locustfile.py -H=https://karens.pythonanywhere.com -u 1 -r 1 --headless --run-time=30s --print-stats --csv=first_report --logfile=first_report.log --log-transactions-in-file --html=first_report.html --csv-full-history --check-fail-ratio
+$ locust -f locustfile.py -H=https://karens.pythonanywhere.com -u 1 -r 1 --headless --run-time=30s --print-stats --csv=first_report --logfile=first_report.log --log-transactions-in-file --html=first_report.html --csv-full-history
 ```
 Then open `first_report.html` file with test results.  

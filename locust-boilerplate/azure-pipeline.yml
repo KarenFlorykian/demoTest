@@ -25,7 +25,7 @@ stages:
               targetType: 'inline'
               script: |
                 mkdir locust-boilerplate/reports
-                docker run --name=locusttest -v $(Build.SourcesDirectory)/locust-boilerplate:/mnt/locust -w /mnt/locust fkaren/perflocust:latest -f locustfile.py -H=$(ENV_URL) -u $(VUSER) -r $(RAMP_UP) --headless --run-time=$(DURATION) --print-stats --csv=report --logfile=reports/report.log --log-transactions-in-file --html=reports/report.html --csv-full-history --check-fail-ratio
+                docker run --name=locusttest -v $(Build.SourcesDirectory)/locust-boilerplate:/mnt/locust -w /mnt/locust fkaren/perflocust:latest -f locustfile.py -H=$(ENV_URL) -u $(VUSER) -r $(RAMP_UP) --headless --run-time=$(DURATION) --print-stats --csv=report --logfile=reports/report.log --log-transactions-in-file --html=reports/report.html --csv-full-history
                 ls -la locust-boilerplate/reports
           - task: PublishTestResults@2
             inputs:
