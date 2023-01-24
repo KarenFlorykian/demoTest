@@ -26,7 +26,6 @@ stages:
               script: |
                 mkdir locust-boilerplate/reports
                 docker run -u=root --rm --name=locusttest -v $(Build.SourcesDirectory)/locust-boilerplate:/mnt/locust -w /mnt/locust fkaren/perflocust:latest -f locustfile.py -H=$(ENV_URL) -u $(VUSER) -r $(RAMP_UP) --headless --run-time=$(DURATION) --print-stats --csv=reports/report --logfile=reports/report.log --log-transactions-in-file --html=reports/report.html --csv-full-history
-                ls -la locust-boilerplate
                 ls -la locust-boilerplate/reports
                 sudo chmod -R 777 $(Build.SourcesDirectory)
           - task: PublishTestResults@2
