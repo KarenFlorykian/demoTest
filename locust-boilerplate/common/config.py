@@ -24,3 +24,9 @@ password = "NOT_FOUND"
 
 def get_uri():
     return f"{BASE_URL}{BASE_PATH}{API_VERSION}"
+
+
+def assert_contains(response, text):
+    with response as r:
+        if text not in r.text:
+            r.failure(f"Expected {response.text} to contain {text}")
