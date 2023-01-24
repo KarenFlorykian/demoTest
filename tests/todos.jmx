@@ -234,7 +234,7 @@
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
       </ThreadGroup>
       <hashTree>
-        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Open_swagger" enabled="true">
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="01_Open_swagger" enabled="true">
           <boolProp name="TransactionController.includeTimers">false</boolProp>
           <boolProp name="TransactionController.parent">false</boolProp>
         </TransactionController>
@@ -283,7 +283,7 @@
           </UniformRandomTimer>
           <hashTree/>
         </hashTree>
-        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Open_todos" enabled="true">
+        <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="02_Open_todos" enabled="true">
           <boolProp name="TransactionController.includeTimers">false</boolProp>
           <boolProp name="TransactionController.parent">false</boolProp>
         </TransactionController>
@@ -383,7 +383,7 @@ vars.put(&quot;xVar_username&quot;,tmp)
           <boolProp name="IfController.useExpression">true</boolProp>
         </IfController>
         <hashTree>
-          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Open_${xVar_todo1_name}" enabled="true">
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="03_Open_${xVar_todo1_name}" enabled="true">
             <boolProp name="TransactionController.includeTimers">false</boolProp>
             <boolProp name="TransactionController.parent">false</boolProp>
           </TransactionController>
@@ -408,23 +408,15 @@ vars.put(&quot;xVar_username&quot;,tmp)
               <stringProp name="HTTPSampler.response_timeout"></stringProp>
             </HTTPSamplerProxy>
             <hashTree>
-              <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Get_stepNumber_regex" enabled="true">
-                <stringProp name="RegexExtractor.useHeaders">false</stringProp>
-                <stringProp name="RegexExtractor.refname">stepNumber2</stringProp>
-                <stringProp name="RegexExtractor.regex">step_number&quot;.*?value=&quot;(.*?)&quot;</stringProp>
-                <stringProp name="RegexExtractor.template">$1$</stringProp>
-                <stringProp name="RegexExtractor.default"></stringProp>
-                <stringProp name="RegexExtractor.match_number"></stringProp>
-              </RegexExtractor>
-              <hashTree/>
-              <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Get_challenger_regex" enabled="true">
-                <stringProp name="RegexExtractor.useHeaders">false</stringProp>
-                <stringProp name="RegexExtractor.refname">challenger2</stringProp>
-                <stringProp name="RegexExtractor.regex">step_id.+?value=&quot;(.+?)&quot;</stringProp>
-                <stringProp name="RegexExtractor.template">$1$</stringProp>
-                <stringProp name="RegexExtractor.default">NOT_FOUND</stringProp>
-                <stringProp name="RegexExtractor.match_number"></stringProp>
-              </RegexExtractor>
+              <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+                <collectionProp name="Asserion.test_strings">
+                  <stringProp name="-625569085">Register</stringProp>
+                </collectionProp>
+                <stringProp name="Assertion.custom_message"></stringProp>
+                <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+                <boolProp name="Assertion.assume_success">false</boolProp>
+                <intProp name="Assertion.test_type">16</intProp>
+              </ResponseAssertion>
               <hashTree/>
             </hashTree>
           </hashTree>
@@ -440,7 +432,7 @@ vars.put(&quot;xVar_username&quot;,tmp)
             </UniformRandomTimer>
             <hashTree/>
           </hashTree>
-          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Submit_${xVar_todo1_name}" enabled="true">
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="04_Submit_${xVar_todo1_name}" enabled="true">
             <boolProp name="TransactionController.includeTimers">false</boolProp>
             <boolProp name="TransactionController.parent">false</boolProp>
           </TransactionController>
@@ -517,7 +509,7 @@ vars.put(&quot;xVar_username&quot;,tmp)
             <boolProp name="IfController.useExpression">true</boolProp>
           </IfController>
           <hashTree>
-            <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Open_${xVar_todo2_name}" enabled="true">
+            <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="05_Open_${xVar_todo2_name}" enabled="true">
               <boolProp name="TransactionController.includeTimers">false</boolProp>
               <boolProp name="TransactionController.parent">false</boolProp>
             </TransactionController>
@@ -566,7 +558,7 @@ vars.put(&quot;xVar_username&quot;,tmp)
               </UniformRandomTimer>
               <hashTree/>
             </hashTree>
-            <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Submit_${xVar_todo2_name}" enabled="true">
+            <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="06_Submit_${xVar_todo2_name}" enabled="true">
               <boolProp name="TransactionController.includeTimers">false</boolProp>
               <boolProp name="TransactionController.parent">false</boolProp>
             </TransactionController>
@@ -639,7 +631,7 @@ vars.put(&quot;xVar_username&quot;,tmp)
               </UniformRandomTimer>
               <hashTree/>
             </hashTree>
-            <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Open_${xVar_todo3_name}" enabled="true">
+            <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="07_Click_${xVar_todo3_name}" enabled="true">
               <boolProp name="TransactionController.includeTimers">false</boolProp>
               <boolProp name="TransactionController.parent">false</boolProp>
             </TransactionController>
@@ -674,16 +666,6 @@ vars.put(&quot;xVar_username&quot;,tmp)
                   <intProp name="Assertion.test_type">16</intProp>
                 </ResponseAssertion>
                 <hashTree/>
-                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP HeaderManager" enabled="false">
-                  <collectionProp name="HeaderManager.headers">
-                    <elementProp name="" elementType="Header">
-                      <stringProp name="Header.name">Cookie</stringProp>
-                      <stringProp name="Header.value">${xVar_cookies}</stringProp>
-                    </elementProp>
-                  </collectionProp>
-                  <stringProp name="TestPlan.comments">Created from cURL on 2023-01-04T16:08:07.641</stringProp>
-                </HeaderManager>
-                <hashTree/>
               </hashTree>
             </hashTree>
             <TestAction guiclass="TestActionGui" testclass="TestAction" testname="Think Time" enabled="true">
@@ -698,7 +680,7 @@ vars.put(&quot;xVar_username&quot;,tmp)
               </UniformRandomTimer>
               <hashTree/>
             </hashTree>
-            <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="Open_${xVar_todo4_name}" enabled="true">
+            <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="08_Open_${xVar_todo4_name}" enabled="true">
               <boolProp name="TransactionController.includeTimers">false</boolProp>
               <boolProp name="TransactionController.parent">false</boolProp>
             </TransactionController>

@@ -1,0 +1,38 @@
+trigger:
+  - develop
+
+variables:
+  JVM_ARGS: '-Xms1g -Xmx4g'
+
+parameters:
+  - name: generateReport
+    default: true
+    type: boolean
+
+stages:
+  - stage: Server_Side
+    pool:
+      name:  Karen
+    #dependsOn: [] only with enabled subscription
+    displayName: PerfTest_Server_Side
+    jobs:
+      - job: PerfTest
+        timeoutInMinutes: 90 # how long to run the job before automatically cancelling
+        displayName: PerfTest
+        steps:
+          - task: Bash@3
+            inputs:
+              targetType: 'inline'
+              script: |
+                mkdir locust-boilerplate/reports
+                docker run --name=locusttest -v $(Build.SourcesDirectory)/locust-boilerplate:/mnt/locust -w /mnt/locust fkaren/perflocust:latest -f locustfile.py -H=$(ENV_URL) -u $(VUSER) -r $(RAMP_UP) --headless --run-time=$(DURATION) --print-stats --csv=report --logfile=reports/report.log --log-transactions-in-file --html=reports/report.html --csv-full-history --check-fail-ratio
+                ls -la locust-boilerplate/reports
+          - task: PublishTestResults@2
+            inputs:
+              testResultsFormat: 'JUnit' # Options: JUnit, NUnit, VSTest, xUnit, cTest
+              testResultsFiles: 'reports/jmeter.xml'
+          - task: PublishPipelineArtifact@1
+            displayName: Publish Lighthouse Report
+            inputs:
+              targetPath: reports
+              artifact: locust_report
