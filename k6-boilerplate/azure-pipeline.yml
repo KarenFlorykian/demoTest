@@ -25,7 +25,7 @@ stages:
               targetType: 'inline'
               script: |
                 mkdir k6-boilerplate/reports
-                docker run -u=root --rm --name=locusttest -v $(Build.SourcesDirectory)/k6-boilerplate:/tmp -w /tmp grafana/k6 run /tmp/src/tests/$(TEST).js --out json=/tmp/reports/docker_run.json -e THINK_TIME=$(THINK_TIME) -e THINK_TIME_MAX=$(THINK_TIME_MAX) -e $(ENV_URL) -eDURATION=$(DURATION) -e VUSERS=$(VUSER) -e RAMP_UP=$(RAMP_UP)
+                docker run -u=root --rm --name=locusttest -v $(Build.SourcesDirectory)/k6-boilerplate:/tmp -w /tmp grafana/k6 run /tmp/src/tests/$(TEST).js --out json=/tmp/reports/docker_run.json -e THINK_TIME=$(THINK_TIME) -e THINK_TIME_MAX=$(THINK_TIME_MAX) -e ENV_URL=$(ENV_URL) -eDURATION=$(DURATION) -e VUSERS=$(VUSER) -e RAMP_UP=$(RAMP_UP)
                 ls -la k6-boilerplate/reports
                 sudo chmod -R 777 $(Build.SourcesDirectory)
           - task: PublishTestResults@2
