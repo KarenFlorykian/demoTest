@@ -26,12 +26,13 @@ stages:
               script: |
                 mkdir k6-boilerplate/reports
                 docker run -u=root --rm --name=k6 -v $(Build.SourcesDirectory)/k6-boilerplate:/tmp -w /tmp grafana/k6 run /tmp/src/tests/$(TEST).js --out influxdb=http://$(InfluxIP):8086/demoTD --out json=/tmp/reports/test.json -e THINK_TIME=$(THINK_TIME) -e THINK_TIME_MAX=$(THINK_TIME_MAX) -e ENV_URL=$(ENV_URL) -e DURATION="$(DURATION)s" -e VUSERS=$(VUSERS) -e RAMP_UP="$(RAMP_UP)s"
+                cp "summary.html" /tmp/reports/
                 ls -la k6-boilerplate/reports
                 sudo chmod -R 777 $(Build.SourcesDirectory)
-          - task: PublishTestResults@2
-            inputs:
-              testResultsFormat: 'JUnit' # Options: JUnit, NUnit, VSTest, xUnit, cTest
-              testResultsFiles: 'reports/k6.xml'
+#          - task: PublishTestResults@2
+#            inputs:
+#              testResultsFormat: 'JUnit' # Options: JUnit, NUnit, VSTest, xUnit, cTest
+#              testResultsFiles: 'reports/k6.xml'
           - task: PublishPipelineArtifact@1
             displayName: Publish K6 Reports
             inputs:
