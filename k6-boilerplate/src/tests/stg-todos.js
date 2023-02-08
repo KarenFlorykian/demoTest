@@ -22,6 +22,12 @@ import { randomString, randomIntBetween } from '../core/helpers.js';
 
 export const options = {
     maxRedirects: 0, // disable follow redirects
+    thresholds: {
+        // my_rate: ["rate>=0.4"], // Require my_rate's success rate to be >=40%
+        // http_req_duration: ["avg<1000"], // Require http_req_duration's average to be <1000ms
+        'group_duration{group:::01_Open_Swagger}': ['avg < 1'],
+        'group_duration{group:::02_Open_todos}': ['avg < 1']
+    },
     scenarios: {
         registration_scenario: {
             env: stagingConfig(),
@@ -33,10 +39,6 @@ export const options = {
             ],
             gracefulRampDown: '0s',
             // executor: 'shared-iterations', // USER FOR VALIDATION
-            // thresholds: {
-            //     my_rate: ["rate>=0.4"], // Require my_rate's success rate to be >=40%
-            //     http_req_duration: ["avg<1000"], // Require http_req_duration's average to be <1000ms
-            // }
         }
     }
 };
