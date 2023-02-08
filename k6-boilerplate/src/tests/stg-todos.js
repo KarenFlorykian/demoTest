@@ -1,6 +1,7 @@
 import http from 'k6/http';
 import { check, group, sleep } from 'k6';
 import { stagingConfig,RAMP_UP, DURATION, VUSERS,THINK_TIME_MAX, THINK_TIME} from '../core/environmentConfig.js';
+import { htmlReport } from "https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js";
 import { DEFAULT_HEADERS, PASSWORD}  from '../core/constants.js'
 import { randomString, randomIntBetween } from '../core/helpers.js';
 
@@ -158,3 +159,9 @@ export default function () {
     }
 
 }
+
+export function handleSummary(data) {
+    return {
+      "summary.html": htmlReport(data),
+    };
+  }
