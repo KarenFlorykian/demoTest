@@ -26,15 +26,11 @@ class SwaggerSimulation extends Simulation {
     .pause(1 second)
     .exec(http("List Tasks")
       .get("/todos/")
-      .header("X-Fields", "id,task")
-      .check(status.is(200), jsonPath("$[0].task").exists))
-    .pause(1 second)
-    .exec(http("Get All Task")
-      .get("/todos")
+      .check(jsonPath("$[0].task").exists)
       .check(status.is(200), jsonPath("$[-1].id").saveAs("latestId")))
     .exec(session => {
         val latestId = session("latestId").as[String]
-        println(s"Latest id is ${latestId}")
+        println(s"Latest task id is ${latestId}")
         session
     })
     .pause(1 second)
@@ -46,8 +42,7 @@ class SwaggerSimulation extends Simulation {
     .doIf(session => session.isFailed) {
       exec(session => {
         val response = session("resp_body").as[String]
-        println("Here")
-        println(response)
+        println(s"Request Get Task failed with response body: ${response}")
         session
       })
     }
@@ -61,7 +56,22 @@ class SwaggerSimulation extends Simulation {
     .pause(1 second)
     .exec(http("Delete Task")
       .delete("/todos/1")
-      .check(status.in(204, 404)))
+      .check(status.in(204)))
+    .pause(1 second)
+    .exec(http("List Tasks")
+      .get("/todos/")
+      .check(jsonPath("$[0].task").exists)
+      .check(status.is(200), jsonPath("$[-1].id").saveAs("new_latestId")))
+    .exec(session => {
+      val latestId = session("new_latestId").as[String]
+      val latestId_ = session("latestId").as[String]
+      if(latestId_ == latestId){
+        println(s"Well Done New Latest task id is ${latestId} the same as initial")
+      } else {
+        println(s"Something went wrong. Id is ${latestId}")
+      }
+      session
+    })
 
   setUp(scn.inject(atOnceUsers(1)))
       .protocols(httpProtocol)
