@@ -17,7 +17,7 @@ export function stagingConfig(filename) {
 }
 
 
-const DURATION = __ENV.DURATION || '60s';
+const DURATION = __ENV.DURATION || '30s';
 const VUSERS = __ENV.VUSERS || '10';
 const RAMP_UP = __ENV.RAMP_UP || '30s';
 let THINK_TIME = __ENV.THINK_TIME || 5;
